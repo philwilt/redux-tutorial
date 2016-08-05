@@ -1,0 +1,15 @@
+{
+  "name": "redux-tutorial",
+  "version": "1.0.0",
+  "description": "redux tutorial",
+  "main": "index.js",
+  "dependencies": {
+    "redux": "^3.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Phil Wilt",
+  "license": "ISC"
+}
