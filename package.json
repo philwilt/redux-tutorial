@@ -4,9 +4,18 @@
   "description": "redux tutorial",
   "main": "index.js",
   "dependencies": {
-    "redux": "^3.5.2"
+    "react": "^15.3.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-devtools": "^3.3.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "node-sass": "^3.8.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
