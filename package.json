@@ -11,13 +11,15 @@
   },
   "devDependencies": {
     "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.22.0",
     "node-sass": "^3.8.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "author": "Phil Wilt",
   "license": "ISC"

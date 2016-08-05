@@ -1,10 +1,19 @@
 const path = require('path');
+const htmlWebpackPlugin = require('html-webpack-plugin');
+
+const PATHS = {
+  app: path.join(__dirname, 'app'),
+  build: path.join(__dirname, 'build'),
+  styles: path.join(__dirname, 'app', 'styles')
+};
 
 module.exports = {
-  entry: "./entry.js",
+  entry: {
+    app: PATHS.app
+  },
   output: {
-    path: __dirname,
-    filename: "bundle.js"
+    path: PATHS.build,
+    filename: '[name].bundle.js'
   },
   devtool:"source-map",
   module: {
@@ -16,6 +25,11 @@ module.exports = {
     ]
   },
   sassLoader: {
-    includePaths: [path.resolve(__dirname, "./styles")]
-  }
+    includePaths: PATHS.styles
+  },
+  plugins: [
+    new htmlWebpackPlugin({
+      title: 'Redux Demo'
+    })
+  ]
 };
