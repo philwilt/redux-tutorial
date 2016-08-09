@@ -35,6 +35,7 @@ var config;
 // Detect how npm is run and branch based on that
 switch(process.env.npm_lifecycle_event) {
   case 'build':
+  case 'stats':
     config = merge(
       common,
       { devtool: 'source-map' },
@@ -49,7 +50,7 @@ switch(process.env.npm_lifecycle_event) {
       parts.minify(),
       parts.extractCSS(PATHS.style),
       parts.clean(PATHS.build)
-      );
+    );
     break;
   default:
     config = merge(
