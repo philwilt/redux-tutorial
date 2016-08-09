@@ -42,6 +42,11 @@ exports.extractCSS = function(paths) {
           test: /\.scss$/,
           loader: ExtractTextPlugin.extract('style', 'css!sass'),
           include: paths
+        },
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract('style', 'css'),
+          include: paths
         }
       ]
     },

@@ -7,7 +7,10 @@ const parts = require('./libs/parts');
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
-  style: path.join(__dirname, 'app', 'styles', 'main.scss')
+  style: [
+    path.join(__dirname, 'app', 'styles', 'main.scss'),
+    path.join(__dirname, 'node_modules', 'purecss')
+  ]
 };
 
 const common = {
