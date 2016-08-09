@@ -1,4 +1,4 @@
-require("./styles/main.scss");
+require('react');
 
 var component = require('./component')
 
