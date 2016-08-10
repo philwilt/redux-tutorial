@@ -1,7 +1,7 @@
 {
-  "name": "redux-tutorial",
+  "name": "Webpack-Boilerplate",
   "version": "1.0.0",
-  "description": "redux tutorial",
+  "description": "Webpack Boilerplate",
   "main": "index.js",
   "dependencies": {
     "react": "^15.3.0",
@@ -12,6 +12,9 @@
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.10",
     "css-loader": "^0.23.1",
+    "eslint": "^3.2.2",
+    "eslint-config-google": "^0.6.0",
+    "eslint-plugin-react": "^6.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.22.0",
     "node-sass": "^3.8.0",
@@ -28,6 +31,7 @@
     "start": "webpack-dev-server",
     "stats": "webpack --profile --json > stat.json",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "test:lint": "eslint . --ext .js --ext .jsx --cache",
     "build": "webpack"
   },
   "author": "Phil Wilt",
