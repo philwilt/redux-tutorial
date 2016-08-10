@@ -25,9 +25,18 @@ const common = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            title: "Redux Demo"
+            title: "Webpack Boilerplate"
         })
-    ]
+    ],
+    module: {
+      preLoaders: [
+        {
+          test: /\.(js|jsx)$/,
+          loaders: ['eslint'],
+          include: PATHS.app
+        }
+      ]
+    }
 };
 
 var config;
