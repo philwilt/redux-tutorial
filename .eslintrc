@@ -1,26 +1,6 @@
-//
-// {module.exports = {
-//     "extends": "airbnb",
-//     "env": {
-//         "browser": true,
-//         "es6": true,
-//         "node": true
-//     },
-//     "extends": "eslint:recommended",
-//     "parserOptions": {
-//         "ecmaFeatures": {
-//             "experimentalObjectRestSpread": true,
-//             "jsx": true
-//         },
-//         "sourceType": "module"
-//     },
-//     "plugins": [
-//         "react"
-//     ]
-// };
 {
   "extends": [
-    "airbnb", "eslint:recommended", "plugin:react/recommended"
+    "airbnb"
   ],
   "parser": "babel-eslint",
   "env": {
@@ -30,14 +10,6 @@
   },
   "plugins": [
     "react"
-  ],
-  "rules": {
-    "quotes": [2, "single"],
-    "no-console": 0,
-    "no-unused-vars": 0,
-    "react/display-name": 0,
-    "react/prop-types": 0,
-    "react/no-multi-comp": 0
-  }
+  ]
 }
 

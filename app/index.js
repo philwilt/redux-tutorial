@@ -1,5 +1,3 @@
-import React from 'react'
+import component from './component';
 
-var component = require('./component');
-
-document.body.appendChild(component());
+document.body.appendChild(component);
