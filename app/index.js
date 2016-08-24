@@ -1,5 +1,5 @@
-require("react");
+import React from 'react'
 
-var component = require("./component");
+var component = require('./component');
 
 document.body.appendChild(component());

@@ -1,7 +1,7 @@
-module.exports = function() {
-    var element = document.createElement("h1");
+export default function() {
+    var element = document.createElement('h1');
 
-    element.innerHTML = "Webpack Boilerplate!";
+    element.innerHTML = 'Webpack Boilerplate!';
 
     return element;
-};
+}

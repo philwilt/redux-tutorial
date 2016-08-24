@@ -1,76 +1,104 @@
-const path = require("path");
-const htmlWebpackPlugin = require("html-webpack-plugin");
-const merge = require("webpack-merge");
-const validate = require("webpack-validator");
-const parts = require("./libs/parts");
+const path = require('path');
+const merge = require('webpack-merge');
+const validate = require('webpack-validator');
 
+const parts = require('./libs/parts');
+
+const TARGET = process.env.npm_lifecycle_event;
+const ENABLE_POLLING = process.env.ENABLE_POLLING;
 const PATHS = {
-    app: path.join(__dirname, "app"),
-    build: path.join(__dirname, "build"),
-    style: [
-        path.join(__dirname, "app", "styles", "main.scss"),
-        path.join(__dirname, "node_modules", "purecss")
-    ]
+  app: path.join(__dirname, 'app'),
+  style: [
+    path.join(__dirname, 'app', 'styles', 'main.css')
+  ],
+  build: path.join(__dirname, 'build'),
+  test: path.join(__dirname, 'tests')
 };
 
-const common = {
+process.env.BABEL_ENV = TARGET;
+
+const common = merge(
+  {
     entry: {
-        style: PATHS.style,
-        app: PATHS.app
+      app: PATHS.app
     },
     output: {
-        path: PATHS.build,
-        filename: "[name].[hash].js",
-        chunkFilename: "[chunkhash].js"
+      path: PATHS.build,
+      filename: '[name].js'
     },
-    plugins: [
-        new htmlWebpackPlugin({
-            title: "Webpack Boilerplate"
-        })
-    ],
-    module: {
-      preLoaders: [
-        {
-          test: /\.(js|jsx)$/,
-          loaders: ['eslint'],
-          include: PATHS.app
-        }
-      ]
+    resolve: {
+      extensions: ['', '.js', '.jsx']
     }
-};
+  },
+  parts.indexTemplate({
+    title: 'Webpack Boilerplate',
+    appMountId: 'app'
+  }),
+  parts.loadJSX(PATHS.app),
+  parts.lintJSX(PATHS.app)
+);
 
 var config;
 
-// Detect how npm is run and branch based on that
-switch(process.env.npm_lifecycle_event) {
-case "build":
-case "stats":
+switch(TARGET) {
+  case 'build':
+  case 'stats':
     config = merge(
       common,
-      { devtool: "source-map" },
+      {
+        devtool: 'source-map',
+        entry: {
+          style: PATHS.style
+        },
+        output: {
+          path: PATHS.build,
+          filename: '[name].[chunkhash].js',
+          chunkFilename: '[chunkhash].js'
+        }
+      },
+      parts.clean(PATHS.build),
       parts.setFreeVariable(
-        "process.env.NODE_ENV",
-        "production"
+        'process.env.NODE_ENV',
+        'production'
       ),
       parts.extractBundle({
-          name: "vendor",
-          entries: ["react"]
+        name: 'vendor',
+        entries: ['react', 'react-dom']
       }),
       parts.minify(),
-      parts.extractCSS(PATHS.style),
-      parts.clean(PATHS.build)
+      parts.extractCSS(PATHS.style)
     );
     break;
-default:
+  case 'test':
+  case 'test:tdd':
     config = merge(
       common,
+      {
+        devtool: 'inline-source-map'
+      },
+      parts.loadIsparta(PATHS.app),
+      parts.loadJSX(PATHS.test)
+    );
+    break;
+  default:
+    config = merge(
+      common,
+      {
+        devtool: 'eval-source-map',
+        entry: {
+          style: PATHS.style
+        }
+      },
+      parts.setupCSS(PATHS.style),
       parts.devServer({
-          host: process.env.HOST,
-          port: process.env.PORT
+        // Customize host/port here if needed
+        host: process.env.HOST,
+        port: process.env.PORT,
+        poll: ENABLE_POLLING
       }),
-      { devtool: "eval-source-map"},
-      parts.setupCSS(PATHS.style)
+      parts.enableReactPerformanceTools(),
+      parts.npmInstall()
     );
 }
 
-module.exports = validate(config);
+module.exports = validate(config, {});
