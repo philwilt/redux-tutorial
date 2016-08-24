@@ -77,17 +77,9 @@ exports.enableReactPerformanceTools = function() {
 exports.devServer = function(options) {
   const ret = {
     devServer: {
-      // Enable history API fallback so HTML5 History API based
-      // routing works. This is a good default that will come
-      // in handy in more complicated setups.
       historyApiFallback: true,
-
-      // Unlike the cli flag, this doesn't set
-      // HotModuleReplacementPlugin!
       hot: true,
       inline: true,
-
-      // Display only errors to reduce the amount of output.
       stats: 'errors-only',
       quiet: true,
 
@@ -112,9 +104,7 @@ exports.devServer = function(options) {
 
   if(options.poll) {
     ret.watchOptions = {
-      // Delay the rebuild after the first change
       aggregateTimeout: 300,
-      // Poll using interval (in ms, accepts boolean too)
       poll: 1000
     };
   }
@@ -127,8 +117,8 @@ exports.setupCSS = function(paths) {
     module: {
       loaders: [
         {
-          test: /\.css$/,
-          loaders: ['style', 'css'],
+          test: /\.scss$/,
+          loaders: ['style', 'css', 'sass'],
           include: paths
         }
       ]
@@ -193,16 +183,14 @@ exports.extractCSS = function(paths) {
   return {
     module: {
       loaders: [
-        // Extract CSS during build
         {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css'),
+          test: /\.scss$/,
+          loader: ExtractTextPlugin.extract('style', 'css', 'sass'),
           include: paths
         }
       ]
     },
     plugins: [
-      // Output extracted CSS to a file
       new ExtractTextPlugin('[name].[chunkhash].css')
     ]
   };

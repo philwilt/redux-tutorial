@@ -1,7 +1,5 @@
 import React from 'react';
 
-export default function () {
-  return (
-    <h1>Welcome to Webpack Boilerplate!</h1>
-  );
-}
+const Header = () => <h1>Welcome to Webpack Boilerplate!</h1>;
+
+export default Header;

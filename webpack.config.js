@@ -9,7 +9,7 @@ const ENABLE_POLLING = process.env.ENABLE_POLLING;
 const PATHS = {
   app: path.join(__dirname, 'app'),
   style: [
-    path.join(__dirname, 'app', 'styles', 'main.css')
+    path.join(__dirname, 'app', 'styles', 'main.scss')
   ],
   build: path.join(__dirname, 'build'),
   test: path.join(__dirname, 'tests')
